@@ -1,5 +1,5 @@
 import React from 'react';
-import Color from './Tools/ColorPicker.jsx';
+import Color from './ColorPicker.jsx';
 
 const Tools=()=>{
 

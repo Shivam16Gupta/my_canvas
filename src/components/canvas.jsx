@@ -1,14 +1,18 @@
-import React, {useRef,useEffect,useState} from 'react';
-import classses from '../assets/css/canvas.module.css';
+import React, {useRef,useEffect,useState,useContext} from 'react';
+import '../assets/css/canvas.module.css';
 import Tools from './ToolPanel.jsx';
+import {NewColor} from './ColorPicker.jsx';
 
 const Canvas =()=>{
   const canvasRef=useRef(null);
   const contextRef=useRef(null);
   const [drawing,setDrawing]=useState(false);
+  const penColor=useContext(NewColor);
+
 
   useEffect(()=>{
     prepCanvas();
+
   },[]);
 
 
@@ -23,13 +27,14 @@ const Canvas =()=>{
     const context=canvas.getContext("2d");
     context.scale(2,2);
     context.linecap="round";
-    context.strokeStyle="black";
+    context.strokeStyle="white";
     context.lineWidth=5;
     contextRef.current=context;
   };
 
   const startDrawing=({nativeEvent})=>{
     setDrawing(true);
+
     const { offsetX, offsetY } = nativeEvent;
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX,offsetY);
@@ -39,6 +44,7 @@ const Canvas =()=>{
     if(!drawing){
       return;
     }
+
     const { offsetX, offsetY } = nativeEvent;
     contextRef.current.stroke();
     contextRef.current.lineTo(offsetX,offsetY);
@@ -59,15 +65,19 @@ const Canvas =()=>{
 
   return(
           <>
-          <div>
-            <canvas
-            onMouseDown={startDrawing}
-            onMouseUp={finishDrawing}
-            onMouseMove={draw}
-            ref={canvasRef}/>
-            <button onClick={clearCanvas}>Clear Canvas</button>
-          </div>
-          </>
+  <div>
+    <Tools />
+    <canvas
+      onMouseDown = { startDrawing }
+      onMouseUp = { finishDrawing }
+      onMouseMove = { draw }
+      ref={canvasRef}
+    />
+    {penColor}
+    <button onClick={clearCanvas}>Clear Canvas</button>
+  </div>
+</>
+
   );
 }
 
