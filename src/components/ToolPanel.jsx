@@ -1,12 +1,11 @@
-import React from 'react';
-import Color from './ColorPicker.jsx';
+import React from "react";
 
-const Tools=()=>{
 
-  return(
+const Tools = () => {
+  return (
     <>
-    <Color/>
+
     </>
   );
-}
+};
 export default Tools;

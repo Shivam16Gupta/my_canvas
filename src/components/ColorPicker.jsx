@@ -1,27 +1,20 @@
-import React,{useState} from "react";
-import { CirclePicker } from 'react-color';
+import React, { useState} from "react";
+import { CirclePicker } from "react-color";
 
-const NewColor = React.createContext();
 
-const Color=()=>{
-const [background, setBackground] = useState("#fff");
+const Color = () => {
+  const [background, setBackground] = useState("#fff");
+
 
   const handleChange = (color) => {
     setBackground(color.hex);
 
   };
-    return (
-      <>
-      <NewColor.Provider value={'hi'}>
-      <CirclePicker
-        color = { background }
-        onChange = { handleChange }
-      />
-      </NewColor.Provider>
-      </>
-    );
-
-}
+  return (
+    <>
+      <CirclePicker color={background} onChange={handleChange} />
+    </>
+  );
+};
 
 export default Color;
-export {NewColor};
